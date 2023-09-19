@@ -1,7 +1,6 @@
 provider "aws" {
-    alias = "us-east-1"
-    region = "us-east-1"
-
+    alias = "us-west-1"
+    region = "us-west-1"
 }
 
 
@@ -13,7 +12,7 @@ provider "aws" {
 resource "aws_instance" "example" {
   ami = "ami-03f65b8614a860c29"
   instance_type = "t2.micro"
-  provider = "aws.us-east-1"
+  provider = "aws.us-west-1"
 }
 
 resource "aws_instance" "example2" {
