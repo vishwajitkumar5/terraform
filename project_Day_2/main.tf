@@ -1,5 +1,8 @@
 resource "aws_vpc" "myvpc" {
   cidr_block = var.cidr
+  tags = {
+    Name = "web"
+  }
 }
 
 resource "aws_subnet" "sub1" {
