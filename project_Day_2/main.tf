@@ -10,6 +10,9 @@ resource "aws_subnet" "sub1" {
   cidr_block              = "10.1.0.0/24"
   availability_zone       = "us-west-2a"
   map_public_ip_on_launch = true
+  tags = {
+       Name = "websubnet1"
+     }
 }
 
 resource "aws_subnet" "sub2" {
@@ -17,10 +20,16 @@ resource "aws_subnet" "sub2" {
   cidr_block              = "10.1.1.0/24"
   availability_zone       = "us-west-2b"
   map_public_ip_on_launch = true
+  tags = {
+       Name = "websubnet2"
+     }
 }
 
 resource "aws_internet_gateway" "igw" {
   vpc_id = aws_vpc.myvpc.id
+  tags = {
+       Name = "webigw"
+     }
 }
 
 resource "aws_route_table" "RT" {
@@ -74,7 +83,7 @@ resource "aws_security_group" "webSg" {
 }
 
 resource "aws_s3_bucket" "example" {
-  bucket = "demojenkinsmodule"
+  bucket = "demoservermodule"
 }
 
 resource "aws_instance" "webserver1" {
@@ -83,6 +92,9 @@ resource "aws_instance" "webserver1" {
   vpc_security_group_ids = [aws_security_group.webSg.id]
   subnet_id              = aws_subnet.sub1.id
   user_data              = base64encode(file("userdata.sh"))
+  tags = {
+       Name = "webserver1"
+     }
 }
 
 resource "aws_instance" "webserver2" {
@@ -91,6 +103,9 @@ resource "aws_instance" "webserver2" {
   vpc_security_group_ids = [aws_security_group.webSg.id]
   subnet_id              = aws_subnet.sub2.id
   user_data              = base64encode(file("userdata1.sh"))
+  tags = {
+       Name = "webserver2"
+     }
 }
 
 #create alb
