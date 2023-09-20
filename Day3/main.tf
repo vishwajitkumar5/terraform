@@ -1,12 +1,3 @@
-variable "ami_value" {
-    description = "image name"
-}
-
-variable "instance_type_value" {
-    description = "instance type"
-  
-}
-
 provider "aws" {
     region = "us-west-2"
   
@@ -14,5 +5,5 @@ provider "aws" {
 
 resource "aws_instance" "example" {
   ami = "var.ami_value"
-  instance_type = var.instance_type_value
+  instance_type = "var.instance_type_value"
 }
