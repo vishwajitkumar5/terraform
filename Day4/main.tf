@@ -9,3 +9,10 @@ module "ec2_instance" {
     instance_type_value = "t2.micro"
   
 }
+
+module "vpc_creation" {
+    source = "./modules/vpc"
+    vpc_id = "10.1.0.0/16"
+
+  
+}
